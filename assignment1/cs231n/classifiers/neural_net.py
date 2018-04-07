@@ -100,7 +100,7 @@ class TwoLayerNet(object):
     # classifier loss.                                                          #
     #############################################################################
     score = second_hidden_units
-   # score -= np.reshape(np.max(score, axis = 1), (score.shape[0], 1))
+    score -= np.reshape(np.max(score, axis = 1), (score.shape[0], 1))
     scores0 = -np.log(np.exp(score[np.arange(score.shape[0]), y]) / np.sum(np.exp(score), axis = 1))
     loss = np.sum(scores0) / X.shape[0]
     loss += 0.5*(reg*(np.sum(W1*W1) + np.sum(W2*W2)))                  
@@ -129,10 +129,7 @@ class TwoLayerNet(object):
     dZ1 = np.dot(scores1, W2.T)
     dA1 = dZ1
     dA1[A1 <= 0] = 0
-    
-    c = np.random.choice(first_hidden_units.shape[1], first_hidden_units.shape[0])
-    dA1[np.arange(first_hidden_units.shape[0]), c] = 0    
-    
+
     dW1 = np.dot(X.T, dA1) / X.shape[0]
     dW1 += reg*(W1)
     db1 = np.sum(dA1, axis = 0) / X.shape[0]
