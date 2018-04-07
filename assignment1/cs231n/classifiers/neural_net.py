@@ -103,7 +103,7 @@ class TwoLayerNet(object):
     score -= np.reshape(np.max(score, axis = 1), (score.shape[0], 1))
     scores0 = -np.log(np.exp(score[np.arange(score.shape[0]), y]) / np.sum(np.exp(score), axis = 1))
     loss = np.sum(scores0) / X.shape[0]
-    loss += 0.5*(reg*(np.sum(W1*W1) + np.sum(W2*W2)))                  
+    loss += (reg*(np.sum(W1*W1) + np.sum(W2*W2)))                  
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
