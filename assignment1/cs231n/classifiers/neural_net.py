@@ -79,10 +79,7 @@ class TwoLayerNet(object):
     
     first_hidden_units = np.dot(X, W1) + b1
     first_hidden_units = np.maximum(first_hidden_units, 0)
-    
-    b = np.random.choice(first_hidden_units.shape[1], first_hidden_units.shape[0])
-    first_hidden_units[np.arange(first_hidden_units.shape[0]), b] = 0    
-    
+
     second_hidden_units = np.dot(first_hidden_units, W2) + b2              
     scores = second_hidden_units                         
           
