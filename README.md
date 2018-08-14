@@ -1,5 +1,5 @@
-# CS231n
-- These are my solutions for Stanford Convolutional Neural Networks for Visual Recognition(CS231n) class(2017 spring).
+# Convolutional Neural Networks for Visual Recognition(CS231n)
+- These are my solutions for Stanford CS231n class(2017 spring).
 
 ## Completed
 - Assignment1
