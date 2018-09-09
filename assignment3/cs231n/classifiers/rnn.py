@@ -139,7 +139,7 @@ class CaptioningRNN(object):
         ############################################################################
         #loss
         Z = np.dot(features, W_proj) + b_proj # To compute h0
-        h0 = np.tanh(Z) # (1) h0 (N, H)
+        h0 = Z # (1) h0 (N, H)
         embed_out, embed_cache =  word_embedding_forward(captions_in, W_embed) # (2) embed_out (N, T, W)
         
         if self.cell_type == 'lstm':
@@ -160,7 +160,7 @@ class CaptioningRNN(object):
         elif self.cell_type == 'rnn':
             dembed_out, dh0, dWx, dWh, db = rnn_backward(dh, hidden_state_cache)
             
-        dZ = dh0*(1-np.tanh(Z))*(1+np.tanh(Z)) # To compute dW_proj, db_proj
+        dZ = dh0 # To compute dW_proj, db_proj
         dW_proj, db_proj = np.dot(features.T, dZ), np.sum(dZ, axis = 0)
         dW_embed = word_embedding_backward(dembed_out, embed_cache)
         grads['W_proj'], grads['b_proj'], grads['W_embed'], grads['Wx'], grads['Wh'], grads['b'], grads['W_vocab'], grads['b_vocab'] = dW_proj, db_proj, dW_embed, dWx, dWh, db, dW_vocab, db_vocab
